@@ -3,8 +3,8 @@ import datetime
 import os
 import sys, getopt
 
-loadpath = "Coords.txt"
-savepath = "GPS Data - {}.html".format(datetime.datetime.today().date())
+loadpath = "Coordinates/Coords.txt"
+savepath = "Map Files/GPS Data - {}.html".format(datetime.datetime.today().date())
 
 def usage():
 	print "-h, --help			-displays usage"
@@ -22,7 +22,7 @@ for opt, arg in opts:
 		usage()
 		sys.exit()
 	if opt in ("-f", "--filepath"):
-		loadpath = arg
+		loadpath = "Coordinates/" + arg
 	
 data = []
 with open(loadpath, "r") as f:
