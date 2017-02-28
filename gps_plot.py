@@ -24,21 +24,29 @@ for opt, arg in opts:
 	if opt in ("-f", "--filepath"):
 		loadpath = "Coordinates/" + arg
 	
+# Gets data from log file and sorts it into a 2D array:
+# [[latitude, longitude], ... etc ]
 data = []
 with open(loadpath, "r") as f:
-    for line in f:
-        data.append(line)
-data = [x.strip().replace(',','').split() for x in data]
+	lines = f.readlines()[1:]
+for line in lines:
+	data.append(line[20:])
+data = [x.strip().replace(',',' ').split() for x in data]
 
+# Gets list of the latitudes and longitudes
 lats = []
 longs = []
-for i in range(len(data)):
+for i in range(len(data)-1):
     lats.append(float(data[i][0]))
     longs.append(float(data[i][1]))
 
+# creates map object centred about the first set of coords
 gmap = gmplot.GoogleMapPlotter(lats[0], longs[0], 18)
 
+# draws a line plot onto the map (thin blue line)
 gmap.plot(lats, longs, 'blue', edge_side=5)
+# saves map as html file
 gmap.draw(savepath)
 
+#launches map
 os.startfile(savepath)

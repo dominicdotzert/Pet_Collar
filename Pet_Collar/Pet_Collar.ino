@@ -21,13 +21,13 @@ File logFile;
 long lastUpdate = 0;
 
 void setup() {
-  Serial.begin(115200);
+//  Serial.begin(115200);
   ss.begin(9600);
 
   // Initialize SD card
   pinMode(10,OUTPUT);
   if (!SD.begin(10)) {
-    Serial.println("SD CARD FAILED.");
+//    Serial.println("SD CARD FAILED.");
     exit(1);
   }
 
